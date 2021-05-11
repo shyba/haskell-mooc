@@ -77,9 +77,11 @@ deal people (card:cards) = _deal (cycle people)
 --   take 10 (averages [1..]) ==> [1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0,5.5]
 
 
-
 averages :: [Double] -> [Double]
-averages = todo
+averages [] = []
+averages xs = runningAvg 0 1 xs
+    where runningAvg acc qty (y:ys) = (((acc+y)/qty):(runningAvg (acc+y) (qty+1) ys))
+          runningAvg _ _ [] = []
 
 ------------------------------------------------------------------------------
 -- Ex 5: Given two lists, xs and ys, and an element z, generate an
